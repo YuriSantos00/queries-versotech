@@ -1,0 +1,10 @@
+SELECT I.ID_PRODUTO AS id_produto, 
+       SUM(I.QUANTIDADE) AS quantidade_vendida,
+       SUM(I.PRECO_PRATICADO * I.QUANTIDADE) AS total_vendido,
+       COUNT(DISTINCT I.ID_PEDIDO) AS pedidos,
+       COUNT(DISTINCT P.ID_CLIENTE) AS clientes
+FROM ITENS_PEDIDO I
+JOIN PEDIDO P ON I.ID_PEDIDO = P.ID_PEDIDO
+GROUP BY I.ID_PRODUTO
+ORDER BY quantidade_vendida DESC, total_vendido DESC
+LIMIT 1;
